@@ -7,21 +7,22 @@ package com.demo.demo;
 
 import java.util.Date;
 import java.util.Objects;
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
 
 /**
  * Device creation
  */
 @Entity
 public class Device {
-
+    
     private @Id @GeneratedValue Long id;
     private String name;
     private String brand;
     private Date creationTime;
 
-    public Device() {
+    public Device(){
     }
 
     /**
@@ -31,10 +32,19 @@ public class Device {
      * @param brand        - the brand which the device belongs
      * @param creationTime - date the device was created
      */
-    public Device(String name, String brand, Date creationTime) {
+    public Device(String name, String brand, Date creationTime){
         this.name = name;
         this.brand = brand;
         this.creationTime = creationTime;
+    }
+
+    /**
+     * Get id from current device
+     * 
+     * @return a long with the id of the device
+     */
+    public Long getId(){
+        return id;
     }
 
     /**
@@ -42,7 +52,7 @@ public class Device {
      * 
      * @return a string with the name of the device
      */
-    public String getName() {
+    public String getName(){
         return name;
     }
 
@@ -51,7 +61,7 @@ public class Device {
      * 
      * @return string with the brande of the device
      */
-    public String getBrand() {
+    public String getBrand(){
         return brand;
     }
 
@@ -60,16 +70,15 @@ public class Device {
      * 
      * @return Date object with the creation time in it.
      */
-    public Date getCreationTime() {
+    public Date getCreationTime(){
         return creationTime;
     }
-
     /**
      * Set the device name with @param name
      * 
      * @param name new name for the device
      */
-    public void setDeviceName(String name) {
+    public void setDeviceName(String name){
         this.name = name;
     }
 
@@ -78,7 +87,7 @@ public class Device {
      * 
      * @param brand new brand for the device
      */
-    public void setDeviceBrand(String brand) {
+    public void setDeviceBrand(String brand){
         this.brand = brand;
     }
 
@@ -87,12 +96,17 @@ public class Device {
      * 
      * @param creationTime new creation time for the device
      */
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(Date creationTime){
         this.creationTime = creationTime;
     }
 
     @Override
-    public boolean equals(Object deviceToComp) {
+    public int hashCode(){
+        return Objects.hash(this.id, this.name, this.brand, this.creationTime);
+    }
+
+    @Override
+    public boolean equals(Object deviceToComp){
         if (this == deviceToComp)
             return true;
         if (!(deviceToComp instanceof Device))
@@ -104,8 +118,8 @@ public class Device {
     }
 
     @Override
-    public String toString() {
-        return "Device{id= " + id + " , name=" + name + " ,brand " + " ,Creation Time= " + creationTime.toString()
-                + "}";
+    public String toString(){
+        return "Device{id= " + id + " , name=" + name + " ,brand " 
+        + " ,Creation Time= " + creationTime.toString() + "}";
     }
 }
