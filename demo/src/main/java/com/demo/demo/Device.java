@@ -74,6 +74,15 @@ public class Device {
         return creationTime;
     }
     /**
+     * Set the device id with @param id
+     * 
+     * @param id new id for the device
+     */
+    public void setDeviceId(Long id){
+        this.id = id;
+    }
+
+    /**
      * Set the device name with @param name
      * 
      * @param name new name for the device
