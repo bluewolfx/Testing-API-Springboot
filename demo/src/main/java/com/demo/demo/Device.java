@@ -14,10 +14,11 @@ import javax.persistence.GeneratedValue;
 /**
  * Device creation
  */
-@Entity
+@Entity //to make object ready for starage in JPA
 public class Device {
-    
-    private @Id @GeneratedValue Long id;
+
+    //Main attributes or our device domain object.    
+    private @Id @GeneratedValue Long id; //indicating id as a primary key.
     private String name;
     private String brand;
     private Date creationTime;
@@ -109,6 +110,9 @@ public class Device {
         this.creationTime = creationTime;
     }
 
+    /*
+     * 
+     */
     @Override
     public int hashCode(){
         return Objects.hash(this.id, this.name, this.brand, this.creationTime);

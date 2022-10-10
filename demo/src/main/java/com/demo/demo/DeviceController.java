@@ -1,5 +1,12 @@
 package com.demo.demo;
 
+/*
+ * Truphone coding challenge
+ * @author: Ricardo Banon de Jesus a.k.a on Github @bluewolfx
+ * In this class we used spring HATEOAS, where is a project to define a RESTFUL service and render it for client consumption
+ * we also use the static helper methods from WebMvcLinkBuilder to build the links shown below
+ */
+
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController //data returned by each method will go straight to the body and won't render a template.
 public class DeviceController {
     
     private final DeviceRepository repository;
@@ -26,10 +33,11 @@ public class DeviceController {
         this.repository = repository;
         this.assembler = assembler;
     }
+    //Routes for each operation corresponding to GET, POST, PUT and DELETE from HTTP
 
     @GetMapping("/devices")
     CollectionModel<EntityModel<Device>> allDevices(){
-        List<EntityModel<Device>> devices = repository.findAll().stream() //
+        List<EntityModel<Device>> devices = repository.findAll().stream() // message driven microservice/event driven
       .map(assembler::toModel) //
       .collect(Collectors.toList());
 
@@ -38,6 +46,7 @@ public class DeviceController {
 
     @GetMapping("/devices")
     Collection<Device> devicesByBrand(@PathVariable String brand){
+        
         return repository.findByBrand(brand);
     }
 
